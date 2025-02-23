@@ -15,6 +15,7 @@ async function main() {
 }
 
 //middleware
+app.use(express.static('./public'));
 app.use(express.json());
 
 
