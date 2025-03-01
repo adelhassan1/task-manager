@@ -1,6 +1,8 @@
 require('dotenv').config();
 const express = require('express');
 const tasksRouter = require('./routes/tasks');
+const notFound = require('./middlewares/not-found');
+const errorHandler = require('./middlewares/error-handler');
 const mongoose = require('mongoose');
 
 
@@ -22,8 +24,10 @@ app.use(express.json());
 // routes
 app.use('/api/v1/tasks', tasksRouter);
 
+app.use(notFound);
+app.use(errorHandler);
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
 	console.log(`Server is running on port ${port}.`);
